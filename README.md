@@ -89,7 +89,6 @@ Claude Code skill ──> python3 ~/.claude/codex-image/gerar.py --cota codex|gp
 - Skill instructions and script messages are in Portuguese (Brazil). Claude reads them fine in any language, and replies in yours.
 - Each image uses your ChatGPT plan's image quota, not Claude tokens.
 - The ChatGPT path depends on chatgpt.com's current menu. If it changes, run `/codex-update-models`.
-- Development notes (Portuguese): [PROGRESSO.md](PROGRESSO.md).
 
 Not affiliated with OpenAI or Anthropic.
 

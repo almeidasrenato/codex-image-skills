@@ -7,3 +7,5 @@ config.json
 __pycache__/
 
 !docs/images/*.jpg
+PROGRESSO.md
+prompt-claude-code.md
