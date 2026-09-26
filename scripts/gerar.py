@@ -200,20 +200,24 @@ JS_ARQUIVAR = r"""(async () => {
   const r = await fetch('/backend-api/conversation/' + id, {method: 'PATCH',
     headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + s.accessToken},
     body: JSON.stringify({is_archived: true})});
-  return JSON.stringify({ok: r.ok, status: r.status});
+  return JSON.stringify({ok: r.ok, status: r.status, id});
 })()"""
 
 
-def reconciliar_app():
-    """O app ChatGPT/Codex para Mac guarda um catalogo local dos chats e so tira os arquivados numa
-    reconciliacao completa, que ele roda quando last_full_reconciled_at e NULL (como nas migrations dele).
-    Sem isso, o chat arquivado pela web segue na barra lateral do app. Formato interno: se mudar, ignora."""
+def reconciliar_app(conversa):
+    """O app ChatGPT/Codex para Mac guarda um catalogo local dos chats e nao percebe o arquivamento pela web.
+    Marca o chat como ausente (missing_candidate=1, como o proprio app faz; a barra lateral le so os 0), para ele
+    sumir assim que o app reabrir, e zera last_full_reconciled_at (como nas migrations dele) para o app
+    reconciliar tudo com o servidor. Formato interno: se mudar, ignora."""
     db = CODEX_HOME / "sqlite" / "codex-dev.db"
     if not db.exists():
         return
     import sqlite3
     try:
         with sqlite3.connect(db, timeout=5) as c:
+            if c.execute("UPDATE local_thread_catalog SET missing_candidate = 1 "
+                         "WHERE host_id LIKE 'chatgpt:%' AND thread_id = ?", (conversa,)).rowcount:
+                c.execute("UPDATE local_thread_catalog_metadata SET catalog_revision = catalog_revision + 1")
             c.execute("UPDATE local_thread_catalog_sync_state SET last_full_reconciled_at = NULL "
                       "WHERE host_id LIKE 'chatgpt:%'")
     except sqlite3.Error:
@@ -317,7 +321,7 @@ def gerar_gpt(prompt, w, h, modelo, esforco, saida, exato, refs=(), editar=False
             print(f"AVISO: nao consegui arquivar a conversa ({arq.get('status')}); arquive manualmente no ChatGPT.",
                   file=sys.stderr)
         else:
-            reconciliar_app()
+            reconciliar_app(arq.get("id"))
     except um.ErroChrome as e:
         sair_erro(f"{e}.", "confira se o Chrome esta aberto e logado no ChatGPT e se a cota de imagens nao acabou; "
                            "rode /codex-update-models se o menu mudou.")

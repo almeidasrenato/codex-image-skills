@@ -89,7 +89,7 @@ Claude Code skill ──> python3 ~/.claude/codex-image/gerar.py --cota codex|gp
 - Skill instructions and script messages are in Portuguese (Brazil). Claude reads them fine in any language, and replies in yours.
 - Each image uses your ChatGPT plan's image quota, not Claude tokens.
 - The ChatGPT path depends on chatgpt.com's current menu. If it changes, run `/codex-update-models`.
-- **ChatGPT/Codex desktop app (macOS):** archived image chats may still show in the app's sidebar until you quit and reopen it. The app keeps a local chat list (`~/.codex/sqlite/codex-dev.db`) and doesn't notice chats archived on the web. After archiving, the script flags that list for a full refresh (the same flag the app's own migrations use), so the chats disappear the next time the app opens. They can't be removed live without restarting the app.
+- **ChatGPT/Codex desktop app (macOS):** archived image chats may still show in the app's sidebar until you quit and reopen it. The app keeps a local chat list (`~/.codex/sqlite/codex-dev.db`) and doesn't notice chats archived on the web. After archiving, the script hides the chat in that list and flags it for a full refresh (the same flag the app's own migrations use), so the chat is gone as soon as the app opens again. They can't be removed live without restarting the app.
 
 Not affiliated with OpenAI or Anthropic.
 

@@ -51,7 +51,7 @@ Variante sem perguntas, em que o Claude decide tudo priorizando qualidade: `code
 ## Rastros
 
 - **Codex**: roda com `--ephemeral` (sem sessão, sem thread no app) e o script apaga a cópia em `~/.codex/generated_images/<thread>/`. Sobra só a cota gasta.
-- **GPT**: o chat temporário do ChatGPT não gera imagem, então o script usa um chat normal e o **arquiva** logo após baixar (some da barra lateral; fica em Configurações > Chats arquivados, e a imagem pode continuar na Biblioteca). No app ChatGPT/Codex para Mac o chat some só na próxima vez que o app abrir (o script pede ao catálogo local do app uma reconciliação completa). O script nunca exclui conversas; o usuário apaga em lote em Configurações > Controles de dados > Excluir chats arquivados.
+- **GPT**: o chat temporário do ChatGPT não gera imagem, então o script usa um chat normal e o **arquiva** logo após baixar (some da barra lateral; fica em Configurações > Chats arquivados, e a imagem pode continuar na Biblioteca). No app ChatGPT/Codex para Mac o chat some só na próxima vez que o app abrir (o script oculta o chat no catálogo local do app e pede uma reconciliação completa). O script nunca exclui conversas; o usuário apaga em lote em Configurações > Controles de dados > Excluir chats arquivados.
 
 ## Onde o Codex salva
 
