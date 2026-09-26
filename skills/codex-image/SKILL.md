@@ -42,8 +42,9 @@ Variante sem perguntas, em que o Claude decide tudo priorizando qualidade: `code
 
 ## Entrega da imagem (nada fica no computador)
 
+- **Sempre renderize aqui no chat**: toda imagem gerada, em qualquer variante (`codex-image`, `codex-image-auto`, `codex-image-project`) e em qualquer pasta, vai para `SendUserFile` com `display: "render"`. Não use `Read` no lugar.
 - **Padrão**: o script salva numa pasta temporária privada. Envie o PNG com `SendUserFile` (`display: "render"`, `status: "normal"`, caption de uma linha com cota · modelo · esforço) e, logo depois, apague o arquivo com `rm "<caminho>"`. O app guarda a própria cópia no card: o usuário abre e baixa por ali. Não mostre o caminho temporário.
-- **Pedido já é para o projeto** (ex.: asset de site): siga a skill `codex-image-project` (salva na pasta de imagens do projeto, com nome descritivo, e não apaga).
+- **Pedido já é para o projeto** (ex.: asset de site): siga a skill `codex-image-project` (salva na pasta de imagens do projeto, com nome descritivo, renderiza aqui e não apaga).
 - **Sem `SendUserFile`** (ex.: `claude` num terminal comum): rode com `--pasta "<raiz do projeto>/codex-image-geradas"` e diga o caminho.
 - **"Aplica no projeto" depois**: o arquivo temporário já foi apagado. Peça o arquivo baixado pelo card (normalmente em `~/Downloads`) ou gere de novo.
 - Não abra a imagem (Read), a menos que o usuário peça.

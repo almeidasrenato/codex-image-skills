@@ -16,7 +16,7 @@ Mesma geração da `codex-image` (script `~/.claude/codex-image/gerar.py`), mas 
    ```
    python3 ~/.claude/codex-image/gerar.py --cota <codex|gpt> --prompt "<prompt>" --modelo X --esforco Y --tamanho WxH [--exato] [--pasta DIR] [--ref-chat] [--ref IMG ...] [--editar]
    ```
-5. **Entregue** como em "Entrega da imagem" da skill `codex-image` (`~/.claude/skills/codex-image/SKILL.md`): renderize com `SendUserFile` e apague o arquivo; se a imagem for para o projeto aberto, siga a skill `codex-image-project`.
+5. **Entregue sempre renderizando aqui no chat**: toda imagem gerada vai para `SendUserFile` (`display: "render"`, `status: "normal"`), mesmo quando salva no projeto ou em `--pasta` escolhida. Não troque isso por `Read`. Depois siga "Entrega da imagem" da skill `codex-image` (`~/.claude/skills/codex-image/SKILL.md`): arquivo temporário é apagado; arquivo salvo no projeto fica (veja a skill `codex-image-project`).
 6. **Se sair `ERRO`**: se for cota do Codex esgotada, troque para GPT uma vez (avisando da aba), com as mesmas referências. Qualquer outro erro: mostre motivo e `COMO CORRIGIR` como vieram e pare.
 
 ## Regras de decisão (qualidade primeiro)

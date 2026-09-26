@@ -23,7 +23,7 @@ Gera imagens **para o projeto aberto** e as salva dentro dele. Usa o mesmo scrip
    ```
    python3 ~/.claude/codex-image/gerar.py --cota codex --prompt "<prompt>" --modelo X --esforco Y --tamanho WxH [--exato] --pasta "<pasta de imagens do projeto>" --nome "<nome>" [--ref-chat] [--ref IMG ...] [--editar]
    ```
-8. **Entregue**: mostre a imagem com `SendUserFile` (`display: "render"`, `status: "normal"`, caption = caminho relativo no projeto). **Não apague**: o arquivo é do projeto.
+8. **Entregue sempre renderizando aqui no chat**: mostre cada imagem gerada com `SendUserFile` (`display: "render"`, `status: "normal"`, caption = caminho relativo no projeto). **Não apague**: o arquivo é do projeto.
 9. **Uso no código**: só se o usuário pediu para aplicar (ex.: "coloca no hero"), troque a referência no componente/página, com `alt` descritivo. Se não pediu, diga em uma linha onde ela encaixaria e ofereça aplicar.
 10. **Se sair `ERRO`**: igual à `codex-image-auto` (cota do Codex esgotada → GPT uma vez, avisando da aba, com as mesmas referências; outros erros → mostre motivo e `COMO CORRIGIR` e pare).
 
