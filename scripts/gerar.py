@@ -204,6 +204,22 @@ JS_ARQUIVAR = r"""(async () => {
 })()"""
 
 
+def reconciliar_app():
+    """O app ChatGPT/Codex para Mac guarda um catalogo local dos chats e so tira os arquivados numa
+    reconciliacao completa, que ele roda quando last_full_reconciled_at e NULL (como nas migrations dele).
+    Sem isso, o chat arquivado pela web segue na barra lateral do app. Formato interno: se mudar, ignora."""
+    db = CODEX_HOME / "sqlite" / "codex-dev.db"
+    if not db.exists():
+        return
+    import sqlite3
+    try:
+        with sqlite3.connect(db, timeout=5) as c:
+            c.execute("UPDATE local_thread_catalog_sync_state SET last_full_reconciled_at = NULL "
+                      "WHERE host_id LIKE 'chatgpt:%'")
+    except sqlite3.Error:
+        pass
+
+
 JS_ANEXOS = r"""(() => {
   const f = document.querySelector('#prompt-textarea, [contenteditable="true"].ProseMirror').closest('form');
   const b = f && f.querySelector('button[data-testid="send-button"], button[aria-label="Enviar"], button[aria-label="Send prompt"]');
@@ -300,6 +316,8 @@ def gerar_gpt(prompt, w, h, modelo, esforco, saida, exato, refs=(), editar=False
         if not arq.get("ok"):
             print(f"AVISO: nao consegui arquivar a conversa ({arq.get('status')}); arquive manualmente no ChatGPT.",
                   file=sys.stderr)
+        else:
+            reconciliar_app()
     except um.ErroChrome as e:
         sair_erro(f"{e}.", "confira se o Chrome esta aberto e logado no ChatGPT e se a cota de imagens nao acabou; "
                            "rode /codex-update-models se o menu mudou.")
