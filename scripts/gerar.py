@@ -366,6 +366,8 @@ def main():
     if a.editar and not refs:
         sair_erro("--editar precisa de pelo menos uma --ref (a imagem a editar).", "passe a imagem com --ref.")
     modelo, esforco = a.modelo, a.esforco           # sem padroes salvos: quem chama decide
+    if a.cota == "codex" and not modelo:             # padrao local: Luna
+        modelo = next((m["slug"] for m in cfg.get("codex", {}).get("modelos", []) if "luna" in m["slug"]), None)
     w, h = ajustar_tamanho(a.tamanho or "1024x1024")
     # padrao: pasta temporaria privada do usuario; a skill renderiza no Claude e apaga o arquivo
     saida = destino(os.path.expanduser(a.pasta or Path(tempfile.gettempdir()) / "codex-image"), a.prompt, a.nome)

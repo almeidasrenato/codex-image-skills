@@ -14,11 +14,11 @@ Gera imagens **para o projeto aberto** e as salva dentro dele. Usa o mesmo scrip
    - **Pasta de imagens**: a que o projeto já usa, nesta ordem: `public/images`, `public/img`, `public/assets`, `src/assets/images`, `src/assets`, `assets/images`, `assets`, `static/images`, `static`, `images`, `img`. Se o usuário indicar outra, use a dele.
    - **Onde a imagem vai entrar** (se o pedido citar uma página/componente): leia esse arquivo para saber o espaço (proporção, largura em CSS) e o tom do texto ao redor.
    - **Identidade visual**: cores e fontes em `tailwind.config.*`, variáveis CSS (`:root`), tema ou design tokens; e 1 ou 2 imagens já existentes na pasta, para manter o estilo (foto, ilustração flat, 3D...).
-3. **Decida** como na `codex-image-auto` (`~/.claude/skills/codex-image-auto/SKILL.md`, "Regras de decisão"): Codex, modelo topo de linha, `xhigh`, tamanho pelo uso. Com o espaço do layout conhecido, escolha a proporção dele. Use `--exato` quando o componente tiver dimensões fixas em pixels.
+3. **Decida** como na `codex-image-auto` (`~/.claude/skills/codex-image-auto/SKILL.md`, "Regras de decisão"): Codex, `gpt-6-luna`, `medium`, tamanho pelo uso. Com o espaço do layout conhecido, escolha a proporção dele. Use `--exato` quando o componente tiver dimensões fixas em pixels.
 4. **Prompt**: completo e específico, como na `codex-image-auto`, **mais** a identidade do projeto: paleta em cores concretas (ex.: "azul #1E40AF e laranja #F97316"), estilo das imagens existentes, público e tom do produto. Em várias imagens, repita o mesmo trecho de estilo em todas.
 4b. **Referências**: imagens do usuário ou do próprio projeto (ex.: logo, fotos já usadas, um print da página) viram `--ref`, seguindo "Imagens de referência" da `codex-image`. Para manter a identidade, prefira passar 1 ou 2 imagens existentes do projeto como referência de estilo em vez de só descrevê-las. Editar uma imagem do projeto: `--editar` com ela como primeira `--ref`, salvando com nome novo (o original fica intacto).
 5. **Nome do arquivo**: curto, descritivo, em kebab-case, pelo papel da imagem (`hero-esportes`, `card-basquete`, `og-image`). Passe em `--nome`; o script nunca sobrescreve (cria `-v2`, `-v3`...).
-6. **Anuncie em uma linha**: `Codex · gpt-6-astra · xhigh · 1536x1024 → public/images/hero-esportes.png`.
+6. **Anuncie em uma linha**: `Codex · gpt-6-luna · medium · 1536x1024 → public/images/hero-esportes.png`.
 7. **Rode** (timeout de 620 s), da raiz do projeto:
    ```
    python3 ~/.claude/codex-image/gerar.py --cota codex --prompt "<prompt>" --modelo X --esforco Y --tamanho WxH [--exato] --pasta "<pasta de imagens do projeto>" --nome "<nome>" [--ref-chat] [--ref IMG ...] [--editar]

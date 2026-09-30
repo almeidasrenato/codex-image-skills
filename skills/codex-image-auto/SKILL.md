@@ -11,7 +11,7 @@ Mesma geração da `codex-image` (script `~/.claude/codex-image/gerar.py`), mas 
 
 1. **Config.** Leia `~/.claude/codex-image/config.json` (só `codex.modelos` e `gpt.opcoes`). Se não existir, diga: "Rode `/codex-update-models` antes." e pare.
 2. **Decida** pelas regras abaixo, sem AskUserQuestion. Se o usuário disse algo (cota, modelo, tamanho), isso vence a regra.
-3. **Anuncie em uma linha** o que escolheu, ex.: `Codex · gpt-6-astra · xhigh · 1536x1024`. Se for GPT, acrescente: "uma aba do seu Chrome vai abrir".
+3. **Anuncie em uma linha** o que escolheu, ex.: `Codex · gpt-6-luna · medium · 1536x1024`. Se for GPT, acrescente: "uma aba do seu Chrome vai abrir".
 4. **Rode** (timeout de 620 s):
    ```
    python3 ~/.claude/codex-image/gerar.py --cota <codex|gpt> --prompt "<prompt>" --modelo X --esforco Y --tamanho WxH [--exato] [--pasta DIR] [--ref-chat] [--ref IMG ...] [--editar]
@@ -24,8 +24,8 @@ Mesma geração da `codex-image` (script `~/.claude/codex-image/gerar.py`), mas 
 - **Imagens de referência**: se o usuário der imagens, siga "Imagens de referência" da `codex-image` (papel de cada imagem no prompt, `--editar` para mudar a própria imagem, não abra as imagens).
 
 - **Cota: Codex.** Controla o tamanho pedido, não abre navegador e não deixa rastro. Use GPT só se o Codex estiver sem cota ou se o usuário pedir.
-- **Modelo Codex**: o primeiro de `codex.modelos` (o catálogo vem em ordem de força; o primeiro é o topo de linha).
-- **Esforço Codex**: `xhigh` se o modelo tiver; senão o maior da lista dele. A imagem em si sai do gpt-image-2; o raciocínio melhora a leitura do pedido. `max`/`ultra` só somam minutos sem ganho visível na imagem, então só use se o usuário pedir.
+- **Modelo Codex**: `gpt-6-luna` (padrão do usuário). Se não estiver em `codex.modelos`, use o primeiro da lista.
+- **Esforço Codex**: `medium`. A imagem em si sai do gpt-image-2; mais esforço só soma minutos sem ganho visível. Só suba (`high`/`xhigh`) se o usuário pedir.
 - **Modelo GPT**: o primeiro `texto` de `gpt.opcoes` com `grupo` = `Modelo` que não tenha `detalhe` de descontinuação (ex.: "Disponível até ...").
 - **Esforço GPT**: o último `texto` com `grupo` = `Esforco` (o mais alto).
 - **Tamanho** pelo uso (o script mantém a resolução nativa, que costuma ser maior):

@@ -14,7 +14,7 @@ Variante sem perguntas, em que o Claude decide tudo priorizando qualidade: `code
 1. **Config.** Leia `~/.claude/codex-image/config.json` (só `codex.modelos` e `gpt.opcoes`). Se não existir, diga: "Rode `/codex-update-models` antes." e pare.
 2. **Pergunte com AskUserQuestion**, numa única chamada, o que o usuário ainda não disse no pedido:
    - **Cota**: `Codex` (sem navegador, sem rastro) ou `GPT` (abre uma aba do Chrome; a conversa é arquivada no fim).
-   - **Modelo**: Codex, os `slug` de `codex.modelos` na ordem do catálogo (o primeiro é o mais forte); GPT, os `texto` de `gpt.opcoes` com `grupo` = `Modelo`. Com mais de 4 opções, mostre as 4 primeiras; o usuário usa "Other" para as demais.
+   - **Modelo**: Codex, os `slug` de `codex.modelos` na ordem do catálogo, com o primeiro `slug` que contenha `luna` (hoje `gpt-6-luna`) na frente como "(Recommended)", o padrão; GPT, os `texto` de `gpt.opcoes` com `grupo` = `Modelo`. Com mais de 4 opções, mostre as 4 primeiras; o usuário usa "Other" para as demais.
    - **Esforço**: Codex, `esforcos` do modelo escolhido; GPT, os `texto` de `gpt.opcoes` com `grupo` = `Esforco`.
    - Se a cota for escolhida na mesma chamada, liste modelo/esforço das duas cotas com o prefixo `Codex:` / `GPT:`.
    - Não ofereça "salvar como padrão" e não grave escolhas no config.
